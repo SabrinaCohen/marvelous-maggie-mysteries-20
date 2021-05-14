@@ -43,6 +43,10 @@ function startNextLevel () {
         MyEnemy.follow(MaggieLucy, 50)
     }
 }
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
+    MaggieLucy.destroy()
+    game.over(false)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
     info.changeLifeBy(-1)
 })
