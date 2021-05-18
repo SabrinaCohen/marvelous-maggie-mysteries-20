@@ -43,6 +43,7 @@ function startNextLevel () {
         game.over(true)
     }
     tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
+    tiles.placeOnRandomTile(Lucy, assets.tile`myTile3`)
     for (let value2 of tiles.getTilesByType(assets.tile`myTile4`)) {
         MyEnemy = sprites.create(assets.tile`myTile5`, SpriteKind.Enemy)
         tiles.placeOnTile(MyEnemy, value2)
