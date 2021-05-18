@@ -123,11 +123,12 @@ Lucy = sprites.create(img`
     ....122221....
     ....133331....
     ....111111....
-    `, SpriteKind.LUCY)
+    `, SpriteKind.Player)
 controller.moveSprite(Maggie, 100, 0)
 controller.player2.moveSprite(Lucy, 100, 0)
 scene.cameraFollowSprite(Maggie)
 info.setLife(3)
+info.player2.setLife(3)
 tiles.setTilemap(tilemap`level7`)
 tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
 Maggie.ay = 500
