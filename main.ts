@@ -1,17 +1,23 @@
 namespace SpriteKind {
     export const Currency = SpriteKind.create()
+    export const LUCY = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     info.changeLifeBy(-1)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (MaggieLucy.vy == 0) {
-        MaggieLucy.vy = -200
+    if (Maggie.vy == 0) {
+        Maggie.vy = -200
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     startNextLevel()
     music.magicWand.play()
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (Lucy.vy == 0) {
+        Lucy.vy = -200
+    }
 })
 function startNextLevel () {
     for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
@@ -36,15 +42,14 @@ function startNextLevel () {
     } else {
         game.over(true)
     }
-    tiles.placeOnRandomTile(MaggieLucy, assets.tile`myTile3`)
+    tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
     for (let value2 of tiles.getTilesByType(assets.tile`myTile4`)) {
         MyEnemy = sprites.create(assets.tile`myTile5`, SpriteKind.Enemy)
         tiles.placeOnTile(MyEnemy, value2)
-        MyEnemy.follow(MaggieLucy, 50)
+        MyEnemy.follow(Maggie, 50)
     }
 }
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
-    MaggieLucy.destroy()
     game.over(false)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
@@ -63,28 +68,67 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let MyEnemy: Sprite = null
 let currentLevel = 0
-let MaggieLucy: Sprite = null
-MaggieLucy = sprites.create(img`
-    8 8 8 8 8 8 8 1 1 4 4 4 4 4 4 4 
-    8 6 6 6 6 6 8 1 1 4 5 5 5 5 5 4 
-    6 8 5 5 5 8 6 1 1 5 4 b b b 4 5 
-    6 5 f 5 f 5 6 1 1 5 b f b f b 5 
-    6 2 5 5 5 2 6 1 1 5 2 b b b 2 5 
-    6 5 2 2 2 5 6 1 1 5 b 2 2 2 b 5 
-    6 5 5 5 5 5 6 1 1 5 b b b b b 5 
-    8 9 5 5 5 9 8 1 1 4 5 b b b 5 4 
-    8 9 8 8 8 9 8 1 1 4 5 4 4 4 5 4 
-    8 9 9 9 9 9 8 1 1 b 5 5 5 5 5 b 
-    8 9 9 9 9 9 8 1 1 b 5 5 5 5 5 b 
-    8 9 9 9 9 9 8 1 1 b 5 5 5 5 5 b 
-    8 6 6 6 6 6 8 1 1 b 4 4 4 4 4 b 
-    9 9 9 9 9 9 9 1 1 5 5 5 5 5 5 5 
-    9 9 9 9 9 9 9 1 1 5 5 5 5 5 5 5 
-    6 6 6 6 6 6 6 1 1 4 4 4 4 4 4 4 
+let Lucy: Sprite = null
+let Maggie: Sprite = null
+Maggie = sprites.create(img`
+    ...11111......
+    ..118881111...
+    .11886666611..
+    .18865555661..
+    .18655555561..
+    .1865f15f161..
+    .1165ff5ff61..
+    ..1655555561..
+    ..1655355561..
+    ..1665555661..
+    ..1686886861..
+    ..1686666861..
+    ..1186666811..
+    ...18666681...
+    ...15666651...
+    ...11999911...
+    ....199991....
+    ....188881....
+    ....188881....
+    ....188881....
+    ....188881....
+    ....166661....
+    ....111111....
+    ..............
+    ..............
     `, SpriteKind.Player)
-MaggieLucy.ay = 500
-controller.moveSprite(MaggieLucy, 100, 0)
-scene.cameraFollowSprite(MaggieLucy)
+Lucy = sprites.create(img`
+    ...1111.......
+    ..112211111...
+    .11223333311..
+    .12235555331..
+    .12355555531..
+    .1135f15f131..
+    ..135ff5ff31..
+    ..1355555531..
+    ..1355355531..
+    ..1335555331..
+    ..1323223231..
+    ..1323333231..
+    ..1123333211..
+    ...12333321...
+    ...15333351...
+    ...11444411...
+    ....144441....
+    ....122221....
+    ....122221....
+    ....122221....
+    ....122221....
+    ....122221....
+    ....122221....
+    ....133331....
+    ....111111....
+    `, SpriteKind.LUCY)
+controller.moveSprite(Maggie, 100, 0)
+controller.player2.moveSprite(Lucy, 100, 0)
+scene.cameraFollowSprite(Maggie)
 info.setLife(3)
 tiles.setTilemap(tilemap`level7`)
-tiles.placeOnRandomTile(MaggieLucy, assets.tile`myTile3`)
+tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
+Maggie.ay = 500
+Lucy.ay = 500
