@@ -3,7 +3,7 @@ namespace SpriteKind {
     export const LUCY = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    info.changeLifeBy(-1)
+    game.over(false)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Maggie.vy == 0) {
@@ -54,7 +54,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sp
     game.over(false)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
-    info.changeLifeBy(-1)
+    game.over(false)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
     game.over(false)
