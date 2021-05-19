@@ -6,11 +6,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
     game.over(false)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    Maggie.vy = -200
+    if (Maggie.vy == 0) {
+        Maggie.vy = -200
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     startNextLevel()
     music.magicWand.play()
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
+    game.over(false)
 })
 function startNextLevel () {
     for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
@@ -44,7 +49,9 @@ function startNextLevel () {
     }
 }
 controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-    Lucy.vy = -200
+    if (Lucy.vy == 0) {
+        Lucy.vy = -200
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
     game.over(false)
@@ -128,5 +135,7 @@ info.setLife(3)
 info.player2.setLife(3)
 tiles.setTilemap(tilemap`level7`)
 tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
+tiles.placeOnRandomTile(Lucy, assets.tile`myTile19`)
 Maggie.ay = 500
 Lucy.ay = 500
+Maggie.say("My name is Maggie, and this is my sister, Lucy. Our mom, Peach, was kidnapped by the evil witch, Anya! Will you help us save her? ", 11000)
