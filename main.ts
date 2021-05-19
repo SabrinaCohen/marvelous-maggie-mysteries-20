@@ -6,18 +6,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
     game.over(false)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Maggie.vy == 0) {
-        Maggie.vy = -200
-    }
+    Maggie.vy = -200
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     startNextLevel()
     music.magicWand.play()
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Lucy.vy == 0) {
-        Lucy.vy = -200
-    }
 })
 function startNextLevel () {
     for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
@@ -47,9 +40,12 @@ function startNextLevel () {
     for (let value2 of tiles.getTilesByType(assets.tile`myTile4`)) {
         MyEnemy = sprites.create(assets.tile`myTile5`, SpriteKind.Enemy)
         tiles.placeOnTile(MyEnemy, value2)
-        MyEnemy.follow(Maggie, 50)
+        MyEnemy.follow(Maggie, 30)
     }
 }
+controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    Lucy.vy = -200
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
     game.over(false)
 })
