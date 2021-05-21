@@ -4,7 +4,7 @@ namespace SpriteKind {
     export const ANYA = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    game.over(false)
+	
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Maggie.vy == 0) {
@@ -16,7 +16,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, lo
     music.magicWand.play()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
-    game.over(false)
+	
 })
 function startNextLevel () {
     for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
@@ -47,7 +47,7 @@ function startNextLevel () {
     tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
     tiles.placeOnRandomTile(Lucy, assets.tile`myTile3`)
     for (let value2 of tiles.getTilesByType(assets.tile`myTile4`)) {
-        MyEnemy = sprites.create(assets.tile`myTile5`, SpriteKind.ANYA)
+        MyEnemy = sprites.create(assets.tile`myTile5`, SpriteKind.Enemy)
         tiles.placeOnTile(MyEnemy, value2)
         MyEnemy.follow(Maggie, 30)
     }
@@ -83,7 +83,7 @@ function startNextLevel () {
             ..11cccccccc11..
             ..1c2c2c2c2c21..
             ..1cccccccccc1..
-            `, SpriteKind.Enemy)
+            `, SpriteKind.ANYA)
         tiles.placeOnRandomTile(ANYA, assets.tile`myTile23`)
         ANYA.follow(Maggie, 20)
     }
@@ -94,24 +94,17 @@ controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pres
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
-    game.over(false)
+	
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
-    game.over(false)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
-    game.over(false)
+	
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.ANYA, function (sprite, otherSprite) {
     info.changeLifeBy(-3)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
-    if (sprite.bottom == otherSprite.y) {
-        sprite.vy = -100
-    } else {
-        info.changeLifeBy(-1)
-    }
+    info.changeLifeBy(-1)
 })
 let ANYA: Sprite = null
 let MyEnemy: Sprite = null
@@ -182,4 +175,3 @@ tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
 tiles.placeOnRandomTile(Lucy, assets.tile`myTile19`)
 Maggie.ay = 500
 Lucy.ay = 500
-Maggie.say("My name is Maggie, and this is my sister, Lucy. Our mom, Peach, was kidnapped by the evil witch, Anya! Will you help us save her? ", 11000)
