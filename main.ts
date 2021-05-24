@@ -7,9 +7,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
 	
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Maggie.vy == 0) {
-        Maggie.vy = -200
-    }
+    Maggie.vy = -200
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     startNextLevel()
@@ -38,9 +36,14 @@ function startNextLevel () {
     } else if (currentLevel == 5) {
         scene.setBackgroundColor(10)
         tiles.setTilemap(tilemap`level5`)
-    } else if (false) {
+    } else if (currentLevel == 6) {
+        scene.setBackgroundColor(15)
+        tiles.setTilemap(tilemap`level9`)
+    } else if (currentLevel == 7) {
         scene.setBackgroundColor(2)
         tiles.setTilemap(tilemap`level8`)
+    } else if (false) {
+    	
     } else {
         game.over(true)
     }
@@ -54,38 +57,38 @@ function startNextLevel () {
     for (let value3 of tiles.getTilesByType(assets.tile`myTile23`)) {
         ANYA = sprites.create(img`
             ................
-            ..111111111111..
-            .11ffffffffff11.
-            11ffff7777ffff11
-            1ffff777777ffff1
-            1f777f1777f177f1
-            1f777ff777ff77f1
-            1f777777477777f1
-            1f727777777727f1
-            1f772777777277f1
-            1ff77222222777f1
-            1ff7772222777ff1
-            1fff77777777fff1
-            1ffff777777ffff1
-            11112acccca21111
-            ...12a2a2a221...
-            ...12aaaaaa21...
-            ...12a2a2a221...
-            ...1caaaaaac1...
-            ...1ca2a2a2c1...
-            ...1caaaaaac1...
-            ...1ca2a2a2c1...
-            ...17aaaaaa71...
-            ...11a2a2a211...
-            ...11aaaaaa11...
-            ...1cccccccc1...
-            ...1c2c2c2c21...
-            ..11cccccccc11..
-            ..1c2c2c2c2c21..
-            ..1cccccccccc1..
+            ....111111111...
+            ...11aa7777711..
+            ...1a2a5557b71..
+            ...1aa55555b71..
+            ...17511511571..
+            ...1751f5f1571..
+            ...17535553571..
+            ...17552225571..
+            ...17555355571..
+            ...17755555b71..
+            ...177c2a2cb71..
+            ...177caaacb71..
+            ...177ca2acb71..
+            ...111c2a2c111..
+            .....1caaac1....
+            .....1ca2ac1....
+            .....152a251....
+            .....12aaa21....
+            .....1aa2aa1....
+            .....1a2a2a1....
+            .....12aaa21....
+            ..1111aa2aa1111.
+            .11fffa2a2afff11
+            .1fff92aaa29fff1
+            .1ff999999999ff1
+            .1fff9999999fff1
+            .11fffffffffff11
+            ..1111111111111.
+            ................
             `, SpriteKind.ANYA)
         tiles.placeOnRandomTile(ANYA, assets.tile`myTile23`)
-        ANYA.follow(Maggie, 20)
+        ANYA.follow(Maggie, 100)
     }
 }
 controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
@@ -172,6 +175,10 @@ info.setLife(3)
 info.player2.setLife(3)
 tiles.setTilemap(tilemap`level7`)
 tiles.placeOnRandomTile(Maggie, assets.tile`myTile3`)
+if (info.life() == 0) {
+    game.over(false)
+}
 tiles.placeOnRandomTile(Lucy, assets.tile`myTile19`)
 Maggie.ay = 500
 Lucy.ay = 500
+game.showLongText("My name is Maggie, and this is my sister, Lucy. Our mom, Peach, was kidnapped by the evil witch, Anya! Will you help us save her? ", DialogLayout.Bottom)
